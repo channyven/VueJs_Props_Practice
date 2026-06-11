@@ -8,35 +8,70 @@ defineProps({
 
 <template>
   <div class="item">
-    <h4>{{ activityName }}</h4>
-    <p>{{ date }}</p>
-    <p>{{ type }}</p>
+    <div class="item-left">
+      <div class="dot"></div>
+      <div>
+        <h4>{{ activityName }}</h4>
+        <p>{{ date }}</p>
+      </div>
+    </div>
+    <span class="badge">{{ type }}</span>
   </div>
 </template>
 
 <style scoped>
 .item {
-  background: white;
-  padding: 14px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  border-left: 4px solid #10b981;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: #162032;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border-left: 3px solid #10b981;
+  transition: background 0.2s ease;
 }
 
 .item:hover {
-  transform: translateX(4px);
+  background: #1a2a40;
+}
+
+.item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  flex-shrink: 0;
 }
 
 h4 {
-  margin: 0 0 4px;
-  font-size: 1rem;
+  margin: 0 0 3px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #e2e8f0;
 }
 
 p {
-  margin: 2px 0;
+  margin: 0;
   color: #64748b;
-  font-size: 0.875rem;
+  font-size: 0.8rem;
+}
+
+.badge {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  white-space: nowrap;
 }
 </style>

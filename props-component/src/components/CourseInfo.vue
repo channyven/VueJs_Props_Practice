@@ -9,39 +9,55 @@ defineProps({
 <template>
   <div class="course-card">
     <h2>{{ courseName }}</h2>
-
-    <p>Instructor: {{ instructor }}</p>
-
-    <div class="progress-bar">
-      <div
-        class="progress-fill"
-        :style="{ width: progress + '%' }"
-      ></div>
+    <p class="instructor"><span>Instructor:</span> <strong>{{ instructor }}</strong></p>
+    <div class="progress-row">
+      <div class="progress-bar">
+        <div class="progress-fill" :style="{ width: progress + '%' }"></div>
+      </div>
+      <span class="pct">{{ progress }}%</span>
     </div>
-
-    <p>{{ progress }}% Completed</p>
+    <p class="completed-label">{{ progress }}% Completed</p>
   </div>
 </template>
 
 <style scoped>
 .course-card {
   background: white;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 28px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 h2 {
-  margin: 0 0 8px;
-  font-size: 1.25rem;
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #7c3aed;
 }
 
-p {
-  margin: 0 0 12px;
-  color: #64748b;
+.instructor {
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.instructor strong {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
 }
 
 .progress-bar {
+  flex: 1;
   height: 10px;
   background: #e2e8f0;
   border-radius: 10px;
@@ -52,6 +68,20 @@ p {
   height: 100%;
   background: linear-gradient(90deg, #2563eb, #3b82f6);
   border-radius: 10px;
-  transition: width 0.4s ease;
+  transition: width 0.6s ease;
+}
+
+.pct {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #2563eb;
+  min-width: 40px;
+  text-align: right;
+}
+
+.completed-label {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.85rem;
 }
 </style>

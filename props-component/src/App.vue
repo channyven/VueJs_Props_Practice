@@ -14,7 +14,6 @@ const course = {
 }
 
 const student = {
-  avatar: 'https://placehold.co/150',
   fullName: 'Alex Morgan',
   email: 'alex@edu.com',
   batch: '2026-A',
@@ -22,64 +21,46 @@ const student = {
 }
 
 const stats = [
-  { title: 'Lessons Completed', value: 12, icon: '📘' },
-  { title: 'Exercises Done', value: 8, icon: '📝' },
-  { title: 'Current Score', value: 92, icon: '🎯' },
-  { title: 'Attendance Rate', value: '95%', icon: '📅' }
+  { title: 'Lessons Completed', value: 12, icon: '📘', color: '#2563eb', bgColor: '#eff6ff' },
+  { title: 'Exercises Done',    value: 8,  icon: '📝', color: '#f97316', bgColor: '#fff7ed' },
+  { title: 'Current Score',     value: 92, icon: '🎯', color: '#e11d48', bgColor: '#fff1f2' },
+  { title: 'Attendance Rate',   value: '95%', icon: '📅', color: '#7c3aed', bgColor: '#f5f3ff' }
 ]
 
 const assignments = [
-  {
-    title: 'Composition API Quiz',
-    dueDate: 'June 15',
-    status: 'Completed'
-  },
-  {
-    title: 'Props Lab Exercise',
-    dueDate: 'June 18',
-    status: 'Pending'
-  }
+  { title: 'Composition API Quiz', dueDate: 'June 15', status: 'Completed' },
+  { title: 'Props Lab Exercise',   dueDate: 'June 18', status: 'Pending'   }
 ]
 
 const activities = [
-  {
-    activityName: 'Submitted Exercise',
-    date: '2 mins ago',
-    type: 'Submit'
-  },
-  {
-    activityName: 'Quiz Completed',
-    date: '1 hour ago',
-    type: 'Quiz'
-  }
+  { activityName: 'Submitted Exercise', date: '2 mins ago', type: 'Submit' },
+  { activityName: 'Quiz Completed',     date: '1 hour ago', type: 'Quiz'   }
 ]
 </script>
 
 <template>
-  <Header />
+  <div class="top-row">
+    <Header />
+    <CourseInfo
+      :courseName="course.courseName"
+      :instructor="course.instructor"
+      :progress="course.progress"
+    />
+  </div>
 
-  <CourseInfo
-    :courseName="course.courseName"
-    :instructor="course.instructor"
-    :progress="course.progress"
-  />
-
-  <StatsSection :stats="stats" />
-
-  <div class="main-content">
-
+  <div class="middle-row">
+    <StatsSection :stats="stats" />
     <StudentProfile
-      :avatar="student.avatar"
       :fullName="student.fullName"
       :email="student.email"
       :batch="student.batch"
       :track="student.track"
     />
+  </div>
 
+  <div class="bottom-row">
     <AssignmentList :assignments="assignments" />
-
     <ActivityTimeline :activities="activities" />
-
   </div>
 
   <Footer />
@@ -95,7 +76,7 @@ const activities = [
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  background: linear-gradient(160deg, #0d1b2e 0%, #0f2044 50%, #162032 100%);
   font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   color: #f1f5f9;
   line-height: 1.6;
@@ -104,81 +85,72 @@ body {
 }
 
 #app {
-  max-width: 1280px;
+  max-width: 1320px;
   margin: 0 auto;
   padding: 32px;
-  animation: fadeIn 0.6s ease-out;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.main-content {
+/* Row 1: Header (60%) + CourseInfo (40%) */
+.top-row {
   display: grid;
-  grid-template-columns: 1fr 1.2fr 1fr;
-  gap: 28px;
-  margin-block: 32px;
-  animation: slideUp 0.5s ease-out 0.2s both;
+  grid-template-columns: 3fr 2fr;
+  gap: 24px;
+  align-items: stretch;
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Row 2: 4 stat cards + student profile */
+.middle-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: start;
 }
 
-.main-content > * {
-  animation: cardFade 0.4s ease-out both;
+/* Row 3: Assignments + Activities */
+.bottom-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 
-.main-content > *:nth-child(1) { animation-delay: 0.3s; }
-.main-content > *:nth-child(2) { animation-delay: 0.4s; }
-.main-content > *:nth-child(3) { animation-delay: 0.5s; }
-
-@keyframes cardFade {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@media (max-width: 1024px) {
-  #app {
-    padding: 24px;
-  }
-
-  .main-content {
+@media (max-width: 1100px) {
+  .top-row {
     grid-template-columns: 1fr 1fr;
-    gap: 24px;
+  }
+
+  .middle-row {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  #app {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .top-row,
+  .bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .middle-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
   #app {
     padding: 16px;
-  }
-
-  .main-content {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    margin-block: 24px;
   }
 }
 </style>

@@ -14,6 +14,8 @@ defineProps({
       :title="stat.title"
       :value="stat.value"
       :icon="stat.icon"
+      :color="stat.color"
+      :bgColor="stat.bgColor"
     />
   </div>
 </template>
@@ -23,7 +25,6 @@ defineProps({
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  margin: 24px 0;
 }
 
 @media (max-width: 1024px) {
@@ -34,7 +35,7 @@ defineProps({
 
 @media (max-width: 640px) {
   .stats-section {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 </style>

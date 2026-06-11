@@ -1,22 +1,31 @@
 <template>
   <footer>
-    <p>© 2026 Vue.js Props Practice Lab</p>
+    <span class="star">⭐</span>
+    <p>Keep up the great work! You're making excellent progress.</p>
   </footer>
 </template>
 
 <style scoped>
 footer {
-  margin-top: 24px;
-  background: #1f2937;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  border-radius: 12px;
+  margin-top: 8px;
+  background: #0f2044;
+  color: #cbd5e1;
+  padding: 18px 28px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.star {
+  font-size: 1.3rem;
+  flex-shrink: 0;
 }
 
 p {
   margin: 0;
-  font-size: 0.875rem;
-  opacity: 0.8;
+  font-size: 0.9rem;
+  color: #94a3b8;
 }
 </style>
